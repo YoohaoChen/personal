@@ -1,6 +1,76 @@
-.main {
+#app, html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #161E2C;
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.main-body {
+    float: left;
     width: 100%;
     background: url("../images/page-bg.jpg") no-repeat top center;
     background-size: 100% auto;
     background-attachment: fixed;
+    height: 100%;
+}
+
+.main-navigation {
+    padding: 0 0;
+    width: 320px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.main-page {
+    position: relative;
+    margin-top: 80px;
+}
+
+.main-menu {
+    float: left;
+    width: 100%;
+}
+
+.main-container {
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.home {
+    background-color: rgba(16, 165, 205, 0.8);
+    background-image: url(../images/menu-bg-home.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.block-keep-ratio {
+    position: relative;
+}
+
+.block-keep-ratio::after {
+    content: '';
+    display: block;
+}
+
+.block-keep-ratio-2-1::after {
+    padding-top: 50%;
+}
+
+.content-main {
+    padding-left: 340px;
+    width: 100%;
+    box-sizing: border-box;
+    float: none;
+}
+
+.banner-main-home {
+    background-color: white;
+    background-image: url("../images/banner-bg-home.jpg");
 }
