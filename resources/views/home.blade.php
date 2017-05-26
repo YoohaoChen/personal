@@ -3,7 +3,7 @@
 @section('title', 'Home')
 @section('css')
     @parent
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
 @endsection
 
 @section('content')
@@ -14,15 +14,49 @@
                     <div class="main-navigation">
                         <div class="main-menu">
                             <div class="menu-container">
-                                <div class="block-keep-ratio block-keep-ratio-2-1 home">
-                                    <a href="#">
-                                        <span>Home</span>
+                                <div class="block-keep-ratio block-keep-ratio-2-1 home block-width-full">
+                                    <a href="#" class="block-keep-ratio_content main-menu-link">
+                                        <span class="main-menu-link-text">Home</span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="menu-container"></div>
-                            <div class="menu-container"></div>
-                            <div class="menu-container"></div>
+                            <div class="menu-container">
+                                <div class="block-keep-ratio block-keep-ratio-1-1 pull-left block-width-half about-me">
+                                    <a href="#" class="main-menu-link block-keep-ratio_content about">
+                                        <i class="glyphicon glyphicon-user main-menu-link-icon"></i>
+                                        <span class="main-menu-link-text">
+                                            About Me
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="block-keep-ratio block-keep-ratio-1-1 pull-right block-width-half contact-main">
+                                    <a href="#" class="main-menu-link block-keep-ratio_content contact">
+                                        <i class="glyphicon glyphicon-envelope main-menu-link-icon"></i>
+                                        <span class="main-menu-link-text">
+                                            About Me
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="menu-container">
+                                <div class="block-keep-ratio photography-main block-keep-ratio-1-1 block-width-full">
+                                    <a href="#" class="photography main-menu-link block-keep-ratio_content">
+                                        <span class="main-menu-link-text">Photography</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="menu-container">
+                                <div class="block-keep-ratio block-width-half block-keep-ratio-1-1 pull-left guitar-main">
+                                    <a href="#" class="main-menu-link block-keep-ratio_content guitar">
+                                        <span class="main-menu-link-text">Guitar</span>
+                                    </a>
+                                </div>
+                                <div class="block-keep-ratio block-width-half block-keep-ratio-1-1 pull-right program-main">
+                                    <a href="#" class="main-menu-link block-keep-ratio_content program">
+                                        <span class="main-menu-link-text">Program</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="content-main">
@@ -39,7 +73,7 @@
                                             <button type="button" class="">SAGITIS SELIT</button>
                                         </div>
                                     </div>
-                                    <img src="images/home-img-1.png" alt="Image" class="img-responsive">
+                                    <img src="{{ asset('images/home-img-1.png') }}" alt="Image" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -50,9 +84,15 @@
                     </div>
                 </div>
             </div>
-            <footer class="row">
-                CopyRight &copy; yoohao
+            <footer class="row text-right">
+                <p class="copyright">CopyRight &copy; <a href="http://yoohao.paibei.online">yoohao</a> 版权所有</p>
             </footer>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    @parent
+    <script>
+    </script>
 @endsection
