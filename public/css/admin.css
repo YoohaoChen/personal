@@ -1,0 +1,28 @@
+.album-box-header::after {
+    display: table;
+    content: ' ';
+    clear: both;
+}
+
+.album-box-header {
+    background-color: #444;
+    height: 55px;
+}
+
+.album-box-item {
+    width: 140px;
+    height: 160px;
+    float: left;
+    border: solid 1px #959595;
+    margin: 10px 15px;
+}
+
+.album-box-item:hover {
+    cursor: pointer;
+}
+
+.album-cover {
+    width: 130px;
+    height: 130px;
+    margin: 5px;
+}}

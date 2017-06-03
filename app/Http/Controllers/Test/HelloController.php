@@ -8,15 +8,12 @@
 
 namespace app\Http\Controllers\Test;
 
-
 use App\Http\Controllers\Controller;
 
 class HelloController extends Controller
 {
-
     public function show($id)
     {
-        return view('test.show', ['con' => $this, 'id' => $id]);
+        return response()->json(['name' => 'Hello']);
     }
-
 }

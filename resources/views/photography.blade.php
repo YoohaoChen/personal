@@ -1,14 +1,11 @@
 @extends('layouts.blog')
 
-@section('title', 'Home')
+@section('title', '摄影')
 
 @section('content')
-    <div class="row">
-        
-    </div>
+
 @endsection
 
 @section('javascript')
-    <script>
-    </script>
+
 @endsection
