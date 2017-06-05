@@ -11,20 +11,81 @@
     <title>@yield('title')</title>
 
     <!-- Styles -->
-    @section('css')
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @show
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/iview.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    @yield('style')
     <link rel="Shortcut icon" href="/favicon.ico">
 </head>
 <body>
-    <div id="app">
-        @yield('content')
+<div id="app">
+    <header id="header" class="header">
+        <div class="container">
+            <div class="pull-left">
+                <span style="color: black;">Yoohao</span>
+            </div>
+            <div class="pull-right">
+                <i-menu mode="horizontal" v-on:on-select="menuChange">
+                    @if(!Auth::guest())
+                        <Menu-item name="user">
+                            <Icon type="person"></Icon>
+                            {{ Auth::user()->name }}
+                        </Menu-item>
+                    @endif
+                    <Menu-item name="home">
+                        <Icon type="ios-home"></Icon>
+                        Home
+                    </Menu-item>
+                    <Menu-item name="photography">
+                        <Icon type="camera"></Icon>
+                        摄影
+                    </Menu-item>
+                    <Menu-item name="guitar">
+                        <Icon type="music-note"></Icon>
+                        吉他
+                    </Menu-item>
+                    <Menu-item name="program">
+                        <Icon type="code"></Icon>
+                        编程
+                    </Menu-item>
+                </i-menu>
+            </div>
+        </div>
+    </header>
+    @yield('content')
+    <div id="footer" class="footer">
+        <div class="container">
+            <Row>
+                <i-col span="12">
+                    <a href="{{ route('about') }}">About Me</a>
+                </i-col>
+                <i-col span="12">
+                    CopyRight &copy; <a href="{{ route('home') }}">yoohao</a> 版权所有
+                </i-col>
+            </Row>
+        </div>
     </div>
-
+    <Back-top></Back-top>
+</div>
+<script type="text/javascript">
+   /* var app = new Vue({
+        el: "#app",
+        data: {
+        },
+        methods: {
+            menuChange: function(name) {
+//                console.log(name);
+                if (name === 'user') {
+                    window.location.href = "{{ url('admin/index') }}"
+                } else {
+                    window.location.href = "{{ url('/') }}/"+name
+                }
+            }
+        }
+    });*/
+</script>
     <!-- Scripts -->
-    @section('javascript')
-        <script src="{{ asset('js/app.js') }}"></script>
-    @show
+    @yield('javascript')
 </body>
 </html>

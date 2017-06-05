@@ -12,81 +12,79 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/iview.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     @yield('style')
-    <link rel="Shortcut icon" href="/favicon.ico">
+    <link rel="Shortcut icon" href="{{ url('/favicon.ico') }}">
 </head>
 <body>
 <div class="main-body" id="app">
-    <header class="header">
+    <header class="header" id="header">
         <div class="container">
-            <div class="navbar">
-                <div class="navbar-header">
-                    <a href="{{ route('home') }}">Yoohao</a>
-                </div>
-                <ul class="navbar-nav nav navbar-right">
-                    <li>
-                        <form id="logout-form" class="" action="{{ route('logout') }}" method="post">
-                        <button type="submit" name="button" class="btn btn-lg btn-logout">退出</button>
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-                </ul>
+            <div class="pull-left">
+                <a href="{{ route('home') }}">Yoohao</a>
+            </div>
+            <div class="logout-box pull-right">
+                <i-form ref="logoutForm" method="post" action="{{ route('logout') }}">
+                    <div class="logout-box"><i-button type="primary" html-type="submit">退出</i-button></div>
+                </i-form>
             </div>
         </div>
     </header>
     <div class="" style="height: 1px;">
 
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="main-navigation pull-left">
-                <h3>操作列表</h3>
-                <div class="row">
-                    <h4>摄影</h4>
-                    <ul class="nav">
-                        <li><a href="{{ url('admin/album') }}">相册</a></li>
-                        <li><a href="#">图集</a></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h4>吉他</h4>
-                    <ul class="nav">
-                        <li><a href="#">吉他谱</a></li>
-                        <li><a href="#">吉他学习</a></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h4>编程</h4>
-                    <ul class="nav">
-                        <li><a href="#">php</a></li>
-                        <li><a href="#">web前端</a></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h4>访问</h4>
-                </div>
-            </div>
-            <div class="main-content pull-right">
-                @yield('content')
-            </div>
+    <div class="container main-content">
+        <Row>
+            <i-col span="6">
+                <i-menu v-on:on-select="selectMenuItem">
+                    <Submenu name="1">
+                        <template slot="title">
+                            <Icon type="camera"></Icon>
+                            摄影
+                        </template>
+                        <Menu-item name="album">相册</Menu-item>
+                        <Menu-item name="1-2">图集</Menu-item>
+                    </Submenu>
+                    <Submenu name="2">
+                        <template slot="title">
+                            <Icon type="music-note"></Icon>
+                            吉他
+                        </template>
+                        <Menu-item name="2-1">相册</Menu-item>
+                        <Menu-item name="2-2">图集</Menu-item>
+                    </Submenu>
+                    <Submenu name="3">
+                        <template slot="title">
+                            <Icon type="code"></Icon>
+                            编程
+                        </template>
+                        <Menu-item name="3-1">相册</Menu-item>
+                        <Menu-item name="3-2">图集</Menu-item>
+                    </Submenu>
+                </i-menu>
+            </i-col>
+            <i-col span="18">@yield('content')</i-col>
+        </Row>
+    </div>
+    <div id="footer" class="footer">
+        <div class="container">
+            <Row>
+                <i-col span="12">
+                    <a href="{{ route('about') }}">About Me</a>
+                </i-col>
+                <i-col span="12">
+                    CopyRight &copy; <a href="{{ route('home') }}">yoohao</a> 版权所有
+                </i-col>
+            </Row>
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <span class="pull-left about">
-                    <a href="{{ route('about') }}">About Me</a>
-                </span>
-                <span class="pull-right copy-right">CopyRight &copy; <a href="{{ route('home') }}">yoohao</a> 版权所有</span>
-            </div>
-        </div>
-    </footer>
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 @yield('javascript')
 </body>
 </html>

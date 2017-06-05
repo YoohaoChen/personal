@@ -42,6 +42,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'auth
     Route::post('/album', 'PostController@album');
 
     Route::post('/albumslist', 'PostController@albumslist');
+    Route::post('/photos', 'PostController@getPhotos');
 });
 
 Auth::routes();

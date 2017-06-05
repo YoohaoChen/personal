@@ -6,15 +6,18 @@
 
 .album-box-header {
     background-color: #444;
-    height: 55px;
+    height: 56px;
+    padding: 10px;
 }
 
 .album-box-item {
-    width: 140px;
-    height: 160px;
+    width: 150px;
+    height: 170px;
     float: left;
     border: solid 1px #959595;
     margin: 10px 15px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .album-box-item:hover {
@@ -25,4 +28,26 @@
     width: 130px;
     height: 130px;
     margin: 5px;
-}}
+}
+
+.photo-box-item {
+    width: 150px;
+    height: 170px;
+    margin: 10px 15px;
+    border: 1px solid #959595;
+    float: left;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.photo {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+}
+
+.photo-name {
+    width: 140px;
+    overflow: hidden;
+    text-align: center;
+}

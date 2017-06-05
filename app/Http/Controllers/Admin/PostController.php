@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Photo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -26,20 +27,36 @@ class PostController extends Controller
         return view('admin.album');
     }
 
+    /**
+     * @param Request $request
+     */
     public function album(Request $request)
     {
         //查看,创建和删除
     }
 
-    public function albumsList()
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function albumsList(Request $request)
     {
         //获取相册列表
         $data = DB::table('albums')->get();
         return response()->json($data);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getPhotos(Request $request)
     {
         //获取指定相册的图片
+        $photos = DB::table('photos')->where('album_id', $request->albumId)->paginate(15);
+        foreach ($photos as $value) {
+            $value->photoUrl = asset('uploads/'.$value->path);
+        };
+        return response()->json($photos);
     }
 }

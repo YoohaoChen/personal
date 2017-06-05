@@ -24,6 +24,7 @@
   "author": "yoohao <yoohaobetter@163.com>",
   "license": "MIT",
   "dependencies": {
-    "element-ui": "^1.3.4"
+    "element-ui": "^1.3.4",
+    "iview": "^2.0.0-rc.15"
   }
 }

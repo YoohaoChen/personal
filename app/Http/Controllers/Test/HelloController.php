@@ -9,11 +9,15 @@
 namespace app\Http\Controllers\Test;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
-    public function show($id)
+    public function show(Request $request)
     {
-        return response()->json(['name' => 'Hello']);
+        $users = DB::table('tests')->paginate(15);
+//        $users = $users->setPath('test/show')->toJson();
+        return view('test.show', ['users' => $users]);
     }
 }
