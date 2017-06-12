@@ -1,78 +1,14 @@
 @extends('layouts.app')
 
 @section('title', 'Show Hello')
-
 @section('style')
-<style>
-.layout{
-    border: 1px solid #d7dde4;
-    background: #f5f7f9;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-}
-.layout-logo{
-    width: 100px;
-    height: 30px;
-    background: #5b6270;
-    border-radius: 3px;
-    float: left;
-    position: relative;
-    top: 15px;
-    left: 20px;
-}
-.layout-header{
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-}
-.layout-copy{
-    text-align: center;
-    padding: 10px 0 20px;
-    color: #9ea7b4;
-}
-.layout-ceiling{
-    background: #464c5b;
-    padding: 10px 0;
-    overflow: hidden;
-}
-.layout-ceiling-main{
-    float: right;
-    margin-right: 15px;
-}
-.layout-ceiling-main a{
-    color: #9ba7b5;
-}
-</style>
+    <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
+@endsection
+@section('style')
+<!--suppress XmlUnboundNsPrefix -->
+
 @endsection
 @section('content')
-    {{--<p>Hello Test!</p>
-    <test></test>--}}
-    {{--<page></page>--}}
-    {{--<Page :total="100" show-elevator show-sizer show-total @on-change="change"></Page>--}}
-    {{--<div class="layout">
-        <div class="layout-ceiling">
-            <div class="layout-container">
-                <div class="layout-ceiling-main">
-                    <a href="#">注册登录</a> |
-                    <a href="#">帮助中心</a> |
-                    <a href="#">安全中心</a> |
-                    <a href="#">服务大厅</a>
-                </div>
-            </div>
-        </div>
-        <div class="layout-header">
-            <div class="layout-container">
-                <div class="layout-logo"></div>
-            </div>
-        </div>
-        <div style="height: 200px">
-            <div class="layout-container"></div>
-        </div>
-        <div class="layout-copy">
-            2011-2016 &copy; TalkingData
-        </div>
-    </div>--}}
     <div class="container">
         @foreach ($users as $user)
             {{ $user->name }}<br>
@@ -85,8 +21,8 @@
                 <Tab-pane label="标签二" name="name2">标签二的内容</Tab-pane>
                 <Tab-pane label="标签三" name="name3">标签三的内容</Tab-pane>
             </Tabs>
-            <i-Form ref="formInline" :model="formInline" :rules="ruleInline" inline method="post" action="{{ route('logout') }}">
-                <input type="hidden">
+            <i-Form ref="formInline" :model="formInline" :rules="ruleInline" inline method="post" action="{{ url('/test/editortest') }}">
+                <input type="hidden" value="{{ csrf_token() }}" name="_token">
                 <Form-item prop="user">
                     <i-input type="text" v-model="formInline.user" placeholder="Username" :class="'layout'">
                         <Icon type="ios-person-outline" slot="prepend"></Icon>
@@ -98,7 +34,7 @@
                     </i-input>
                 </Form-item>
                 <Form-item>
-                    <i-button type="primary" @click="handleSubmit('formInline')">登录</i-button>
+                    <i-button type="primary" html-type="submit" @click="handleSubmit('formInline')">登录</i-button>
                 </Form-item>
             </i-Form>
 
@@ -107,10 +43,11 @@
             </Row>
 
             <i-button type="primary" @click="modal1 = true">显示对话框</i-button>
-            <Modal v-model="modal1" title="普通的Modal对话框标题" v-on:on-ok="ok" v-on:on-cancel="cancel"></Modal>
-            <p>对话框内容</p>
-            <p>对话框内容</p>
-            <p>对话框内容</p>
+            <Modal v-model="modal1" title="普通的Modal对话框标题" v-on:on-ok="ok" v-on:on-cancel="cancel">
+                <?php echo html_entity_decode($articles[0]->content) ?>
+                {{ $articles[0]->content }}
+                <div>测试</div>
+            </Modal>
             {{--</Modal>--}}
             <Back-top :height="100"></Back-top>
 
@@ -232,12 +169,34 @@
                 </Radio-group>
 
     </div>
-
+    <div id="ttt"></div>
+    <form id="ttf" action="{{ url('/admin/albumupdate') }}" method="post" enctype="multipart/form-data" onsubmit="tests">
+        {{ csrf_field() }}
+        <input type="text" name="input">
+        <i-button type="primary" html-type="submit">确认</i-button>
+    </form>
+    <i-form ref="formtest" :model="formtest" action="{{ url('/admin/albumupdate') }}" method="post">
+        <Form-item label="name" prop="name">
+            <i-input type="text" v-model="formtest.name"></i-input>
+        </Form-item>
+        <Form-item prop="submit">
+            <i-button type="primary" html-type="submit" v-model="formtest.submit">确认</i-button>
+        </Form-item>
+    </i-form>
+    <div id="toolbar"></div>
+    <div id="editor"></div>
+    <i-button type="primary" v-on:click="editorTest">查询</i-button>
+    <i-button type="primary" @click="info">提醒</i-button>
+    <div>
+        @{{ editorHtml }}
+    </div>
 @endsection
 
 @section('javascript')
+    {{--<script src="https://cdn.quilljs.com/1.2.6/quill.js"></script>--}}
+    <script src=" {{ asset('js/wangEditor.js') }}"></script>
     <script>
-        var app = new Vue({
+        let app = new Vue({
             el: "#app",
             data: {
                 pageSize: 15,
@@ -255,7 +214,11 @@
                     ]
                 },
                 modal1: false,
-                theme2: 'light'
+                theme2: 'light',
+                formtest: {
+                    name: ''
+                },
+                editorHtml: ''
             },
             methods: {
                 change: function(page) {
@@ -275,9 +238,64 @@
                     } else {
                         window.location.href = "{{ url('/') }}/"+name
                     }
+                },
+                editorTest: function() {
+                    this.editorHtml = editor.txt.html();
+                    console.log(editor.txt.html())
+                },
+                handleSubmit: function(name) {
+//                    this.$refs[name].formSubmit();
+//                    console.log(valid);
+                    this.$refs[name].validate((valid) => {
+                        if (valid) {
+                            this.$Message.success('提交成功!');
+                        } else {
+                            this.$Message.error('表单验证失败!');
+                        }
+                    });
+                },
+                info () {
+                    this.$Message.info('这是一条普通的提醒');
+                    this.$Notice.success({
+                        title: '文章上传成功！',
+                        desc: ''
+                    });
                 }
             }
         });
 //        console.log(apps)
+        /*var config = {
+            /!*modules: {
+                toolbar: '#toolbar'
+            },*!/
+            theme: 'snow',
+            formats: ['bold', 'italic', 'color', 'Image']
+        };
+        var editor = new Quill('#editor', config);*/
+        const E = window.wangEditor;
+        let editor = new E('#editor');
+        editor.customConfig.uploadImgServer = '{{ url('/test/editortest') }}';
+        editor.customConfig.uploadImgParams = {
+            _token: '{{ csrf_token() }}'
+        };
+        editor.customConfig.uploadImgHooks = {
+            before: function (xhr, editor, files) {
+                console.log(xhr);
+                console.log(editor);
+                console.log(files);
+//                files.name = 'photo';
+                return files;
+            }
+        };
+        editor.create();
+        {{--editor.txt.append({{ html_entity_decode($articles[0]->content) }});--}}
+        console.log($('#aaa'));
+        $('#aaa').on('change', function() {
+            var $this = $(this);
+            console.log($this);
+            console.log($this[0].files);
+        });
+        document.getElementById('ttt').innerHTML = "{{ html_entity_decode($articles[0]->content) }}"
     </script>
+
 @endsection

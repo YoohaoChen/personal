@@ -19,7 +19,8 @@
 </template>
 <script>
     import {Row} from 'iview'
+    import {Col} from 'iview'
     export default {
-        components: {Row}
+        components: {Row, Col}
     }
 </script>

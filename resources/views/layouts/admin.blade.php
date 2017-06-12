@@ -27,9 +27,10 @@
                 <a href="{{ route('home') }}">Yoohao</a>
             </div>
             <div class="logout-box pull-right">
-                <i-form ref="logoutForm" method="post" action="{{ route('logout') }}">
+                <form action="{{ route('logout') }}" method="post">
+                    {{ csrf_field() }}
                     <div class="logout-box"><i-button type="primary" html-type="submit">退出</i-button></div>
-                </i-form>
+                </form>
             </div>
         </div>
     </header>
@@ -39,22 +40,22 @@
     <div class="container main-content">
         <Row>
             <i-col span="6">
-                <i-menu v-on:on-select="selectMenuItem">
+                <i-menu v-on:on-select="selectMenuItem" active-name="newarticle" :open-names="['1', '2', '3', '4', '5']">
                     <Submenu name="1">
                         <template slot="title">
                             <Icon type="camera"></Icon>
                             摄影
                         </template>
                         <Menu-item name="album">相册</Menu-item>
-                        <Menu-item name="1-2">图集</Menu-item>
+                        <Menu-item name="photos">图集</Menu-item>
                     </Submenu>
                     <Submenu name="2">
                         <template slot="title">
                             <Icon type="music-note"></Icon>
-                            吉他
+                            音乐
                         </template>
-                        <Menu-item name="2-1">相册</Menu-item>
-                        <Menu-item name="2-2">图集</Menu-item>
+                        <Menu-item name="music">音乐推荐</Menu-item>
+                        <Menu-item name="guitar">吉他</Menu-item>
                     </Submenu>
                     <Submenu name="3">
                         <template slot="title">
@@ -63,6 +64,22 @@
                         </template>
                         <Menu-item name="3-1">相册</Menu-item>
                         <Menu-item name="3-2">图集</Menu-item>
+                    </Submenu>
+                    <Submenu name="4">
+                        <template slot="title">
+                            <Icon type="ios-paper"></Icon>
+                            文章管理
+                        </template>
+                        <Menu-item name="articles">文章列表</Menu-item>
+                        <Menu-item name="newarticle">新建文章</Menu-item>
+                    </Submenu>
+                    <Submenu name="5">
+                        <template slot="title">
+                            <Icon type="ios-paper"></Icon>
+                            模块管理
+                        </template>
+                        <Menu-item name="modulelist">模块列表</Menu-item>
+                        <Menu-item name="newmodule">新建模块</Menu-item>
                     </Submenu>
                 </i-menu>
             </i-col>

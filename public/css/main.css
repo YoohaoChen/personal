@@ -37,3 +37,31 @@
     border: solid 1px #a4aaae;
     /*border-top: none;*/
 }
+
+.album-photo-upload {
+    padding: 10px;
+    min-height: 240px;
+}
+
+.album-select {
+    margin-right: 10px;
+}
+
+/* photos */
+
+.photos-box {
+    background-color: #fff;
+}
+
+/* article */
+
+.new-article-box {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* 轮换图片 */
+
+.home-carousel {
+
+}

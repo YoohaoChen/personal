@@ -14,8 +14,22 @@ require('iview');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-/*Vue.component('example', require('./components/Example.vue'));
+// Vue.component('example', require('./components/Example.vue'));
 
-const app = new Vue({
-    el: '#app'
+/*const app = new Vue({
+    el: '#app',
+    data: {
+        urls: {}
+    },
+    methods: {
+        menuChange: function(name) {
+//                console.log(name);
+            if (name === 'user') {
+                window.location.href = this.urls.admin.index
+            } else {
+                console.log(this.urls.root+"/"+name)
+                window.location.href = this.urls.root+name
+            }
+        }
+    }
 });*/

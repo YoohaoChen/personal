@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/iview.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     @yield('style')
     <link rel="Shortcut icon" href="/favicon.ico">
 </head>
@@ -41,9 +40,9 @@
                         <Icon type="camera"></Icon>
                         摄影
                     </Menu-item>
-                    <Menu-item name="guitar">
+                    <Menu-item name="music">
                         <Icon type="music-note"></Icon>
-                        吉他
+                        音乐
                     </Menu-item>
                     <Menu-item name="program">
                         <Icon type="code"></Icon>
@@ -54,6 +53,7 @@
         </div>
     </header>
     @yield('content')
+    <Back-top></Back-top>
     <div id="footer" class="footer">
         <div class="container">
             <Row>
@@ -68,23 +68,7 @@
     </div>
     <Back-top></Back-top>
 </div>
-<script type="text/javascript">
-   /* var app = new Vue({
-        el: "#app",
-        data: {
-        },
-        methods: {
-            menuChange: function(name) {
-//                console.log(name);
-                if (name === 'user') {
-                    window.location.href = "{{ url('admin/index') }}"
-                } else {
-                    window.location.href = "{{ url('/') }}/"+name
-                }
-            }
-        }
-    });*/
-</script>
+<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
     <!-- Scripts -->
     @yield('javascript')
 </body>
